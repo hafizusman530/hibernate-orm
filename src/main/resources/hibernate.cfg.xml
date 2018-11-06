@@ -9,5 +9,6 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
         <property name="hibernate.current_session_context_class">thread</property>
+        <mapping class="com.usman.practice.hibernate.entity.Employee"/>
     </session-factory>
 </hibernate-configuration>
