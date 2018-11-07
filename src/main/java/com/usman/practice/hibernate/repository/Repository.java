@@ -1,13 +1,18 @@
 package com.usman.practice.hibernate.repository;
 
+import com.usman.practice.hibernate.entity.Employee;
+
 import java.util.List;
 
 public interface Repository<T> {
-    void add(T t);
+    String add(T t);
 
-    List<T> get();
+    List<T> getList();
 
     boolean delete(String id);
 
     void update(T employee);
+
+    T get(String id);
+
 }

@@ -9,8 +9,11 @@ public class App {
         Repository<Employee> employeeRepository = new EmployeeRepository();
         Employee employee = new Employee("Muhammad", "Usman", "usmandev",
                 "12345", "03217995855", "SKP", "employee");
-        employeeRepository.add(employee);
-        employeeRepository.get().forEach(emp -> System.out.println(emp.toString()));
+        String id = employeeRepository.add(employee);
+        System.out.println("New Employee add with ID " + id);
+        employeeRepository.delete("usmandev");
+        employeeRepository.getList().forEach(emp -> System.out.println(emp.toString()));
+        System.out.println(employeeRepository.get("admin").toString());
     }
 
 }

@@ -9,15 +9,16 @@ import java.util.List;
 
 public class EmployeeRepository implements Repository<Employee> {
     @Override
-    public void add(Employee employee) {
+    public String add(Employee employee) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        session.save(employee);
+        String id = (String) session.save(employee);
         transaction.commit();
+        return id;
     }
 
     @Override
-    public List<Employee> get() {
+    public List<Employee> getList() {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         List<Employee> employeeList = session.createQuery("from Employee").list();
@@ -27,12 +28,27 @@ public class EmployeeRepository implements Repository<Employee> {
     }
 
     @Override
-    public boolean delete(String id) {
-        return false;
+    public boolean delete(String username) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        int status = session.createQuery("delete from Employee where username=:username")
+                .setParameter("username", username)
+                .executeUpdate();
+        session.getTransaction().commit();
+        return status == 1;
     }
 
     @Override
     public void update(Employee employee) {
 
+    }
+
+    @Override
+    public Employee get(String id) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        Employee employee = session.cre
+        session.getTransaction().commit();
+        return employee;
     }
 }
