@@ -1,14 +1,14 @@
-package com.usman.practice.hibernate.service;
+package com.usman.practice.hibernate.repository;
 
 import com.usman.practice.hibernate.entity.Employee;
-import com.usman.practice.hibernate.repository.EmployeeService;
 import com.usman.practice.hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class EmployeeServiceImp implements EmployeeService {
+public class EmployeeRepository implements Repository<Employee> {
+    @Override
     public void add(Employee employee) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -16,6 +16,7 @@ public class EmployeeServiceImp implements EmployeeService {
         transaction.commit();
     }
 
+    @Override
     public List<Employee> get() {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
@@ -25,10 +26,12 @@ public class EmployeeServiceImp implements EmployeeService {
         return employeeList;
     }
 
+    @Override
     public boolean delete(String id) {
         return false;
     }
 
+    @Override
     public void update(Employee employee) {
 
     }
