@@ -35,6 +35,17 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(String id, String firstName, String lastName, String userName, String password, String phone, String address, String type) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.phone = phone;
+        this.address = address;
+        this.type = type;
+    }
+
     public Employee(String firstName, String lastName, String userName, String password, String phone, String address, String type) {
         this.firstName = firstName;
         this.lastName = lastName;

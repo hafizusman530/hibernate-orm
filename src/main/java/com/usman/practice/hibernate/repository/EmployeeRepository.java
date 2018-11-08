@@ -2,8 +2,10 @@ package com.usman.practice.hibernate.repository;
 
 import com.usman.practice.hibernate.entity.Employee;
 import com.usman.practice.hibernate.util.HibernateUtil;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -40,15 +42,20 @@ public class EmployeeRepository implements Repository<Employee> {
 
     @Override
     public void update(Employee employee) {
-
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.update(employee);
+        session.getTransaction().commit();
     }
 
     @Override
-    public Employee get(String id) {
+    public Employee get(String username) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        Employee employee = session.cre
+        Criteria sessionCriteria = session.createCriteria(Employee.class);
+        sessionCriteria.add(Restrictions.eq("userName", username));
+        List employee = sessionCriteria.list();
         session.getTransaction().commit();
-        return employee;
+        return (Employee) employee.get(0);
     }
 }
